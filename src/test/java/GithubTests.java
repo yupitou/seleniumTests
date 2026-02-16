@@ -1,5 +1,6 @@
 import com.codeborne.selenide.ElementsCollection;
 import org.example.pages.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.CollectionCondition.itemWithText;
 import static com.codeborne.selenide.Selenide.*;
@@ -18,6 +19,18 @@ public class GithubTests extends BaseTest {
     public static final String RESOURCES = "Resources";
     public static final String EXPLORE_BY_TOPIC = "EXPLORE BY TOPIC";
 
+    @BeforeAll
+    static void setUp() {
+        githubLoginPage = new GithubLoginPage();
+        githubHomePage = new GithubHomePage();
+        githubHeader = new GithubHeader();
+        githubCICDPage = new GithubCICDPage();
+        githubContactSalesPage = new GithubContactSalesPage();
+        githubCookies = new GithubCookies();
+        googleHomePage = new GoogleHomePage();
+        googleSearchPage = new GoogleSearchPage();
+    }
+
     @Test
     public void successAuth() {
         // Забираем данные из переменных окружения переданных в виде: login=log; password=pass
@@ -28,19 +41,16 @@ public class GithubTests extends BaseTest {
         githubLoginPage.login(login, password);
         String pageTitle = title();
 
-        assertEquals(SUCCESS_AUTH_TITLE, pageTitle, "Title не содержит ожидаемый текст");
+        assertEquals(SUCCESS_AUTH_TITLE, pageTitle);
     }
-
-
 
     @Test
     public void failAuth() {
         githubLoginPage.open();
         githubLoginPage.login(INVALID_LOGIN, INVALID_PASSWORD);
-
         String pageTitle = title();
 
-        assertEquals(FAIL_AUTH_TITLE, pageTitle, "Title не содержит ожидаемый текст");
+        assertEquals(FAIL_AUTH_TITLE, pageTitle);
     }
 
     @Test
