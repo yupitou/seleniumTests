@@ -6,7 +6,7 @@ import static com.codeborne.selenide.CollectionCondition.itemWithText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GithubTests extends BaseTest {
+public class GithubTests {
 
     public static final String SUCCESS_AUTH_TITLE = "GitHub";
     public static final String FAIL_AUTH_TITLE = "Sign in to GitHub · GitHub";
@@ -19,21 +19,16 @@ public class GithubTests extends BaseTest {
     public static final String RESOURCES = "Resources";
     public static final String EXPLORE_BY_TOPIC = "EXPLORE BY TOPIC";
 
-    @BeforeAll
-    static void setUp() {
-        githubLoginPage = new GithubLoginPage();
-        githubHomePage = new GithubHomePage();
-        githubHeader = new GithubHeader();
-        githubCICDPage = new GithubCICDPage();
-        githubContactSalesPage = new GithubContactSalesPage();
-        githubCookies = new GithubCookies();
-        googleHomePage = new GoogleHomePage();
-        googleSearchPage = new GoogleSearchPage();
-    }
+    GithubLoginPage githubLoginPage = new GithubLoginPage();
+    GithubHomePage githubHomePage = new GithubHomePage();
+    GithubHeader githubHeader = new GithubHeader();
+    GithubCICDPage githubCICDPage = new GithubCICDPage();
+    GithubContactSalesPage githubContactSalesPage = new GithubContactSalesPage();
+    GithubCookies githubCookies = new GithubCookies();
 
     @Test
     public void successAuth() {
-        // Забираем данные из переменных окружения переданных в виде: login=log; password=pass
+        // Забираем данные из переменных окружения, переданных в виде: login=log; password=pass
         String login = System.getenv("login");
         String password = System.getenv("password");
 
